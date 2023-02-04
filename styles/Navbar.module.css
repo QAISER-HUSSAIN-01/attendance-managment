@@ -1,0 +1,56 @@
+.navbar{
+    box-shadow: 1px 1px 3px gray, 1px 1px 3px gray;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px 40px;
+}
+.logo{
+   display: flex;
+   align-items: center;
+   /* gap: 10px; */
+}
+.first__alphabet{
+  font-size: 60px;
+  color: orange;
+}
+.logo__text{
+    display: flex;
+    flex-direction: column;
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    position: relative;
+}
+.logo__text >span:nth-child(2){
+    text-align: end;
+    /* color: orange; */
+    font-weight: bold;
+}
+.logo__text >span:nth-child(2)::before{
+    content: "";
+    position: absolute;
+    bottom: -5px;
+    right: 0px;
+    height: 2px;
+    width: 46px;
+    background-color: orange;
+    border-radius: 50%;
+}
+.logo__text >span:nth-child(2)::after{
+    content: "";
+    position: absolute;
+    bottom: -6px;
+    right: -10px;
+    height: 5px;
+    width: 5px;
+    background-color: orange;
+    border-radius: 50%;
+}
+
+
+.icon{
+    font-size: 24px;
+    color: orange;
+    cursor: pointer;
+}
