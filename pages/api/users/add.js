@@ -11,12 +11,12 @@ export default async function handler(req, res) {
                 // console.log('user exist',isUserExist);
                 if (isUserExist[0]) {
                     res.status(400).json({ message: 'user already exist', success: true });
-                    await db.disconnect();
+                    // await db.disconnect();
                 } else {
                     const newUser = await User.create(req.body);
                     // console.log(newUser)
                     res.status(201).json({ message: 'user created', data: newUser, success: true })
-                    await db.disconnect();
+                    // await db.disconnect();
 
                 }
             } catch (error) {
