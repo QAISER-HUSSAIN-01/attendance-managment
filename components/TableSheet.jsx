@@ -22,8 +22,13 @@ function TableSheet() {
   const [isDel, setDel] = useState({ isTrue: true, index: '' });
 
   const [data, setData] = useState([]);
-  console.log(data)
-
+  // console.log(data)
+ 
+  if(data[0]){
+    console.log('true')
+  }else{
+    console.log('false')
+  }
   let days = (year, month) => {
     return new Date(year, month+1, 0).getDate();
   }
@@ -106,7 +111,8 @@ function TableSheet() {
         </div>
         <div className={styles.table__body}>
           <ul>
-            {isLoading && data[0] ? "loading" :
+            {isLoading ? "loading" : 
+            !data[0] ? "loading" :
               data?.map((item, index) => (
                 <TableList
                   key={index}
