@@ -42,18 +42,23 @@
 }
 .table__body > ul{
     list-style: none;
-    background-color: lightgreen;
+    /* background-color: lightgreen; */
     padding: 0;
 }
 .table__body > ul > li{
-    background-color: #f4f4f4;
+    /* background-color: #fcfcfc; */
     margin-bottom: 10px;
     list-style: none;
     display: flex;
     padding: 10px;
+    box-shadow: 1px 1px 3px lightgrey,-1px -1px 3px lightgrey;
 }
 .list__name{
     flex:0.2;
+    cursor: pointer;
+}
+.list__name:hover{
+    color: orange;
 }
 .inputs{
    display: flex;

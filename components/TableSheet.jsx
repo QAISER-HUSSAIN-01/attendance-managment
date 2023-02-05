@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styles from '../styles/Table.module.css';
+import { useSelector } from 'react-redux'
+import TableList from './TableList';
 // const styles = {}
 let weekDays = [
   'Wed', 'Thu', 'Fri', 'Sat',
@@ -11,9 +13,12 @@ let weekDays = [
 let months = ['January', 'Febuary', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
 function TableSheet() {
+  const formChanges = useSelector((state) => state.form.value)
+  console.log(formChanges)
   const [present, setPresent] = useState({});
   const [isLoading, setLoading] = useState(false);
-  const [refetch,setRefetch] = useState(false);
+  const [refetch, setRefetch] = useState(false);
+  const [isDel, setDel] = useState({isTrue:true,index:''});
 
   // console.log(present)
   const [data, setData] = useState([]);
@@ -42,16 +47,29 @@ function TableSheet() {
 
   const handleChange = async (id, value, index) => {
     setLoading(true);
-    setPresent({id:id,attendance:value,index:index})
+    setPresent({ id: id, attendance: value, index: index })
     const response = await fetch(`${URL}/api/users`, {
       method: 'POST',
       headers: { 'Content-Type': "application/json" },
-      body: JSON.stringify({id:id,attendance:value,index:index})
+      body: JSON.stringify({ id: id, attendance: value, index: index })
     })
     const json = await response.json();
     console.log(json);
     setLoading(false);
-    setRefetch(refetch ? false: true);
+    setRefetch(refetch ? false : true);
+  }
+
+  const handleDelete = async (id) => {
+    setLoading(true);
+    const response = await fetch(`${URL}/api/users/${id}`, {
+      method: 'POST',
+      headers: { 'Content-Type': "application/json" },
+      // body: JSON.stringify(id)
+    });
+    const json = await response.json();
+    console.log(json);
+    setLoading(false);
+    setRefetch(refetch ? false : true);
   }
 
   async function fetchData() {
@@ -60,20 +78,12 @@ function TableSheet() {
       headers: { 'Content-Type': "application/json" }
     });
     const json = await response.json();
-    // console.log(json.data);
-    // console.log('useeffect running')
     setData(json.data);
   }
 
   useEffect(() => {
     fetchData()
-  }, [refetch])
-
-
-
-
-  // console.log(data)
-
+  }, [refetch, formChanges])
 
   return (
     <div className={styles.container}>
@@ -95,23 +105,34 @@ function TableSheet() {
           <ul>
             {isLoading && data ? "loading" :
               data.map((item, index) => (
-                <li key={index}>
-                  <span className={styles.list__name}>{item.name}</span>
-                  <div className={styles.inputs}>
-                    {
-                      workingDays.map((value, index) => (
-                        <input
-                          checked={item.attendance[index] === 'present' ? true : item.attendance[index] === 'abscent' ? true : null}
-                          style={{ accentColor: item.attendance[index] === 'abscent' ? 'red' : item.attendance[index] === 'present' ? 'green' : 'blue' }}
-                          key={index}
-                          type="radio"
-                          value={'present'}
-                          // disabled={item.attendance[index] === 'present' || 'abscent' ? true : false}
-                          onChange={(e) => { handleChange(item._id, e.target.value,index) }} />
-                      ))
-                    }
-                  </div>
-                </li>
+                <TableList
+                  key={index}
+                  styles={styles}
+                  isDel={isDel}
+                  setDel={setDel}
+                  item={item}
+                  index={index}
+                  workingDays={workingDays}
+                  handleChange={handleChange}
+                  handleDelete={handleDelete}
+                />
+                // <li key={index}>
+                //  {isDel ? <span className={styles.list__name} onClick={()=>setDel(false)}>{item.name}</span> :  <MdDelete onClick={()=>handleDelete(item._id)}/>} 
+                //   <div className={styles.inputs}>
+                //     {
+                //       workingDays.map((value, index) => (
+                //         <input
+                //           checked={item.attendance[index] === 'present' ? true : item.attendance[index] === 'abscent' ? true : null}
+                //           style={{ accentColor: item.attendance[index] === 'abscent' ? 'red' : item.attendance[index] === 'present' ? 'green' : 'blue' }}
+                //           key={index}
+                //           type="radio"
+                //           value={'present'}
+                //           // disabled={item.attendance[index] === 'present' || 'abscent' ? true : false}
+                //           onChange={(e) => { handleChange(item._id, e.target.value,index) }} />
+                //       ))
+                //     }
+                //   </div>
+                // </li>
               ))
             }
 

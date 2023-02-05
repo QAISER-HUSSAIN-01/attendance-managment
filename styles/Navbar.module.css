@@ -4,6 +4,7 @@
     justify-content: space-between;
     align-items: center;
     padding: 0px 40px;
+    z-index: 999;
 }
 .logo{
    display: flex;
@@ -48,9 +49,79 @@
     border-radius: 50%;
 }
 
+.menu{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.menu > button{
+    padding: 7px 12px;
+    background-color: white;
+    border: 2px solid orange;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.menu > button:hover{
+    background-color: rgba(252, 201, 106, 0.89);
+}
 
 .icon{
     font-size: 24px;
     color: orange;
     cursor: pointer;
+}
+
+.user__form{
+    z-index: 111;
+    position: absolute;
+    right: 50px;
+    /* top: -500px; */
+    background-color: white;
+    height: max-content;
+    width: 300px;
+    box-shadow: 1px 1px 3px grey,-1px -1px 3px grey;
+    border-radius: 10px;
+    padding: 20px;
+    transition: all ease-in-out 0.1s;
+}
+.form{
+    display: flex;
+    /* gap: 20px; */
+    flex-direction: column;
+    align-items: center;
+}
+.form__input{
+    border: 2px solid lightgrey;
+    border-radius: 5px;
+    padding: 10px 20px;
+    outline: none;
+    width: 80%;
+    margin-bottom: 20px;
+}
+
+.form__button{
+    width: 50%;
+    padding: 10px 20px;
+    border-radius: 5px;
+    color: white;
+    border: none;
+    background-color: green;
+    cursor: pointer;
+}
+.form__button:hover{
+    background-color: rgb(15, 173, 15);
+}
+.form__close{
+    font-size: 24px;
+    border: 1px solid lightgrey;
+    border-radius: 50%;
+    padding: 10px;
+    color: gray;
+    cursor: pointer;
+    margin-top: 10px;
+}
+.form__close:hover{
+    box-shadow: 1px 0.5px 3px gray,-1px -0.5px 3px gray;
 }
