@@ -7,9 +7,11 @@ function UserForm({styles,setClose}) {
     const dispatch = useDispatch();
    const [text, setText] = useState('');
    const [isData, setDate]= useState({});
-
+   const [isProgress,setProgress] = useState(false);
     const handleSubmit=async(e)=>{
         e.preventDefault();
+        setProgress(true);
+        setText('');
         const attendanceLength = ['','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','']
         const response = await fetch(`${URL}/api/users/add`,{
             method:'POST',
@@ -19,7 +21,7 @@ function UserForm({styles,setClose}) {
         const json = await response.json();
         setDate(json);
         dispatch(formChanges(json.data))
-        setText('')
+        setProgress(false);
     }
 
     const handleClose = ()=>{
@@ -29,7 +31,7 @@ function UserForm({styles,setClose}) {
   return (
     <form onSubmit={handleSubmit} className={styles.form}>
         <input type="text" placeholder='user name' className={styles.form__input} value={text} onChange={(e)=>setText(e.target.value)}/>
-        <input type="submit" value={'Add'} className={styles.form__button} />
+        <input type="submit" value={isProgress ? 'In progress' : 'Add'} className={styles.form__button} />
         {isData.success?<p style={{lineHeight:0,color:isData.message === 'user created' ? 'green':'red'}}>{isData.message}</p>:<p style={{display:'none'}}></p>}
         <MdClose className={styles.form__close} onClick={handleClose} />
     </form>

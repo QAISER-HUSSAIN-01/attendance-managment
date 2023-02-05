@@ -1,8 +1,8 @@
 import db from '../../../db';
 import User from '../../../model/users';
+
 export default async function handler(req, res) {
     const { method } = req;
-
     switch (method) {
         case 'GET':
             try {
