@@ -11,6 +11,7 @@ let weekDays = [
   'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri'
 ]
 let months = ['January', 'Febuary', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+const URL = process.env.NODE_ENV === 'production' ? 'https://attendance-managment.vercel.app' : 'http://localhost:3000';
 
 function TableSheet() {
   const formChanges = useSelector((state) => state.form.value)
@@ -20,9 +21,9 @@ function TableSheet() {
   const [refetch, setRefetch] = useState(false);
   const [isDel, setDel] = useState({ isTrue: true, index: '' });
 
-  // console.log(present)
   const [data, setData] = useState([]);
-  const URL = process.env.NODE_ENV === 'production' ? 'https://attendance-managment.vercel.app' : 'http://localhost:3000';
+  console.log(data)
+
   let days = (year, month) => {
     return new Date(year, month+1, 0).getDate();
   }
@@ -64,7 +65,6 @@ function TableSheet() {
     const response = await fetch(`${URL}/api/users/${id}`, {
       method: 'POST',
       headers: { 'Content-Type': "application/json" },
-      // body: JSON.stringify(id)
     });
     const json = await response.json();
     console.log(json);
@@ -73,17 +73,19 @@ function TableSheet() {
     setRefetch(refetch ? false : true);
   }
 
-  async function fetchData() {
-    const response = await fetch(`${URL}/api/users`, {
-      method: 'GET',
-      headers: { 'Content-Type': "application/json" }
-    });
-    const json = await response.json();
-    setData(json.data);
-  }
+  
 
   useEffect(() => {
-    fetchData()
+    // fetchData()
+    async function fetchData() {
+      const response = await fetch(`${URL}/api/users`, {
+        method: 'GET',
+        headers: { 'Content-Type': "application/json" }
+      });
+      const json = await response.json();
+      setData(json.data);
+    }
+    fetchData();
   }, [refetch, formChanges])
 
   return (
