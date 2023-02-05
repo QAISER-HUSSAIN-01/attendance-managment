@@ -18,7 +18,7 @@ function TableList({ styles, isDel, setDel, item, index, workingDays, handleChan
                          disabled={item.attendance[i] === 'present' ? true : item.attendance[i] === 'abscent' ? true: false}
                          style={{color:item.attendance[i] === 'present' ? 'green' : item.attendance[i] === 'abscent' ? 'red': 'black',border:item.attendance[i] === 'present' ? '2px solid green' : item.attendance[i] === 'abscent' ? '2px solid red': '2px solid black'}}
                          >
-                            <option value={item.attendance[i] === 'present' ? 'present': item.attendance[i] === 'abscent' ? 'abscent' : '...'  }>{item.attendance[i] === 'present' ? 'P': item.attendance[i] === 'abscent' ? 'A' : '...'  }</option>
+                            <option value={item.attendance[i] === 'present' ? 'present': item.attendance[i] === 'abscent' ? 'abscent' : '.'  }>{item.attendance[i] === 'present' ? 'P': item.attendance[i] === 'abscent' ? 'A' : '.'  }</option>
                             <option value="present">P</option>
                             <option value="abscent">A</option>
                         </select>
