@@ -1,4 +1,4 @@
-import connect from '../../../db';
+import db from '../../../db';
 import User from '../../../model/users';
 export default async function handler(req, res) {
     const { method } = req;
@@ -6,7 +6,7 @@ export default async function handler(req, res) {
     switch (method) {
         case 'GET':
             try {
-                await connect();
+                await db.connect();
                 const user = await User.find();
                 if(user){
                     res.status(200).json({ message: 'user found',data:user });
@@ -18,13 +18,8 @@ export default async function handler(req, res) {
             break;
         case 'POST':
             try {
-                await connect();
+                await db.connect();
                 const{id,name,attendance:attend,index} = req.body;
-                
-                // console.log(req.body);
-                // const newUser= await User.create(req.body);
-                // res.status(200).json({ message: 'post request run',data: newUser });
-          
                 const exist = await User.findById(id);
                 exist.attendance[index] = attend;
                 console.log('new attendance array: ',exist.attendance);
@@ -34,7 +29,7 @@ export default async function handler(req, res) {
                     attendance:exist.attendance,
                 });
                 res.status(200).json({ message: 'post request run',data: newUser });
-
+               await db.disconnect();
             } catch (error) {
                 res.status(404).json({ message: 'bad request' });
             }
