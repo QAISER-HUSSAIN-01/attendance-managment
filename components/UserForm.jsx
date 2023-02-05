@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { MdClose } from 'react-icons/md';
 import { useDispatch } from 'react-redux';
 import {formChanges} from '../store/statemanagement';
-const URL = process.env.NODE_ENV === 'production' ? 'https://touristapp.vercel.app' : 'http://localhost:3000';
+const URL = process.env.NODE_ENV === 'production' ? 'https://attendance-managment.vercel.app' : 'http://localhost:3000';
 function UserForm({styles,setClose}) {
     const dispatch = useDispatch();
    const [text, setText] = useState('');
