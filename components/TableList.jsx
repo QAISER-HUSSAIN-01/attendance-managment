@@ -6,8 +6,9 @@ function TableList({ styles, isDel, setDel, item, index, workingDays, handleChan
         <li key={index}>
             
             <div className={styles.list__name} key={index}> {isDel.index === index ?
-                    <MdDelete key={index} onClick={() => handleDelete(item._id)} />:
-                    <span key={index} onClick={() => setDel({ isTrue: false, index: index })}>{item.name}</span> }</div>
+                    <MdDelete key={index} style={{color:'red',fontSize:'24px'}} onClick={() => handleDelete(item._id)} />:
+                    <span key={index} onClick={() => setDel({ isTrue: false, index: index })}>{item.name}</span> }
+                </div>
             <div className={styles.inputs}>
                 {
                     workingDays.map((value, i) => (

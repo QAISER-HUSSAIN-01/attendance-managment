@@ -8,6 +8,7 @@
     border: 1px solid lightgrey;
     margin: 10px;
     padding: 10px;
+    overflow-x: auto;
 }
 
 .table__head {
@@ -26,43 +27,48 @@
 }
 
 .table__name {
-    flex: 0.2
+    flex: 0.2;
+    /* width: 20%; */
 }
-.days{
+
+.days {
     display: flex;
     justify-content: space-between;
     gap: 10px;
 }
+
 .month__name {
     text-align: center;
 }
 
-.table__body {
+.table__body {}
 
-}
-.table__body > ul{
+.table__body>ul {
     list-style: none;
-    /* background-color: lightgreen; */
     padding: 0;
 }
-.table__body > ul > li{
-    /* background-color: #fcfcfc; */
+
+.table__body>ul>li {
     margin-bottom: 10px;
     list-style: none;
     display: flex;
     padding: 10px;
-    box-shadow: 1px 1px 3px lightgrey,-1px -1px 3px lightgrey;
-}
-.list__name{
-    flex:0.2;
-    cursor: pointer;
-}
-.list__name:hover{
-    color: orange;
-}
-.inputs{
-   display: flex;
-   justify-content: space-between;
-   flex: 1;
+    box-shadow: 1px 1px 3px lightgrey, -1px -1px 3px lightgrey;
 }
 
+.list__name {
+    flex: 0.2;
+    /* width: 20%; */
+    cursor: pointer;
+    text-transform: capitalize;
+}
+
+.list__name:hover {
+    color: orange;
+}
+
+.inputs {
+    display: flex;
+    justify-content: space-between;
+    flex: 1;
+}

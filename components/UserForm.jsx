@@ -9,13 +9,12 @@ function UserForm({styles,setClose}) {
    const [isData, setDate]= useState({});
 
     const handleSubmit=async(e)=>{
-        const attendanceLength = ['','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','']
         e.preventDefault();
-        console.log(text);
+        const attendanceLength = ['','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','']
         const response = await fetch(`${URL}/api/users/add`,{
             method:'POST',
             headers:{'Content-Type':'application/json'},
-            body:JSON.stringify({name:text,attendance:attendanceLength})
+            body:JSON.stringify({name:text.toLowerCase(),attendance:attendanceLength})
         })
         const json = await response.json();
         setDate(json);

@@ -18,7 +18,7 @@ function TableSheet() {
   const [present, setPresent] = useState({});
   const [isLoading, setLoading] = useState(false);
   const [refetch, setRefetch] = useState(false);
-  const [isDel, setDel] = useState({isTrue:true,index:''});
+  const [isDel, setDel] = useState({ isTrue: true, index: '' });
 
   // console.log(present)
   const [data, setData] = useState([]);
@@ -69,6 +69,7 @@ function TableSheet() {
     const json = await response.json();
     console.log(json);
     setLoading(false);
+    setDel({ index: '' })
     setRefetch(refetch ? false : true);
   }
 
@@ -116,26 +117,8 @@ function TableSheet() {
                   handleChange={handleChange}
                   handleDelete={handleDelete}
                 />
-                // <li key={index}>
-                //  {isDel ? <span className={styles.list__name} onClick={()=>setDel(false)}>{item.name}</span> :  <MdDelete onClick={()=>handleDelete(item._id)}/>} 
-                //   <div className={styles.inputs}>
-                //     {
-                //       workingDays.map((value, index) => (
-                //         <input
-                //           checked={item.attendance[index] === 'present' ? true : item.attendance[index] === 'abscent' ? true : null}
-                //           style={{ accentColor: item.attendance[index] === 'abscent' ? 'red' : item.attendance[index] === 'present' ? 'green' : 'blue' }}
-                //           key={index}
-                //           type="radio"
-                //           value={'present'}
-                //           // disabled={item.attendance[index] === 'present' || 'abscent' ? true : false}
-                //           onChange={(e) => { handleChange(item._id, e.target.value,index) }} />
-                //       ))
-                //     }
-                //   </div>
-                // </li>
               ))
             }
-
           </ul>
         </div>
       </div>
