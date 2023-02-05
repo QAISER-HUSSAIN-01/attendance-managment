@@ -15,30 +15,25 @@ const URL = process.env.NODE_ENV === 'production' ? 'https://attendance-managmen
 
 function TableSheet() {
   const formChanges = useSelector((state) => state.form.value)
-  console.log(formChanges)
   const [present, setPresent] = useState({});
   const [isLoading, setLoading] = useState(false);
   const [refetch, setRefetch] = useState(false);
   const [isDel, setDel] = useState({ isTrue: true, index: '' });
-
   const [data, setData] = useState([]);
-  // console.log(data)
- 
-  if(data[0]){
-    console.log('true')
-  }else{
-    console.log('false')
-  }
+
   let days = (year, month) => {
     return new Date(year, month+1, 0).getDate();
   }
+
   let monthInNumber = new Date().getMonth();
   let year = new Date().getFullYear();
   let totalDays = days(year, monthInNumber);
   let d = [];
+  
   for (let i = 0; i < totalDays; i++) {
     d.push(weekDays[i])
   }
+  
   let monthInWords = months[monthInNumber];
   let workDays = ['Mon', 'Tue', 'Wed', 'Thu'];
   let workingDays = [];
@@ -60,7 +55,7 @@ function TableSheet() {
       body: JSON.stringify({ id: id, attendance: value, index: index })
     })
     const json = await response.json();
-    console.log(json);
+    // console.log(json);
     setLoading(false);
     setRefetch(refetch ? false : true);
   }
@@ -72,7 +67,7 @@ function TableSheet() {
       headers: { 'Content-Type': "application/json" },
     });
     const json = await response.json();
-    console.log(json);
+    // console.log(json);
     setLoading(false);
     setDel({ index: '' })
     setRefetch(refetch ? false : true);
@@ -81,7 +76,6 @@ function TableSheet() {
   
 
   useEffect(() => {
-    // fetchData()
     async function fetchData() {
       const response = await fetch(`${URL}/api/users`, {
         method: 'GET',
@@ -111,8 +105,8 @@ function TableSheet() {
         </div>
         <div className={styles.table__body}>
           <ul>
-            {isLoading ? "loading" : 
-            !data[0] ? "loading" :
+            {isLoading ? "loading..." : 
+            !data[0] ? "loading..." :
               data?.map((item, index) => (
                 <TableList
                   key={index}

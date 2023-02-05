@@ -8,15 +8,17 @@ export default async function handler(req, res) {
             try {
                 await db.connect();
                 const isUserExist = await User.find({ name: req.body.name });
-                console.log('user exist',isUserExist);
+                // console.log('user exist',isUserExist);
                 if (isUserExist[0]) {
-                     return res.status(400).json({ message: 'user already exist', success:true })
-                }else{
+                    res.status(400).json({ message: 'user already exist', success: true });
+                    await db.disconnect();
+                } else {
                     const newUser = await User.create(req.body);
-                    console.log(newUser)
-                    return res.status(201).json({ message: 'user created', data: newUser, success:true })
+                    // console.log(newUser)
+                    res.status(201).json({ message: 'user created', data: newUser, success: true })
+                    await db.disconnect();
+
                 }
-               await db.disconnect();
             } catch (error) {
                 res.status(404).json({ message: 'something went wrong' })
             }
