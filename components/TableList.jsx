@@ -12,7 +12,7 @@ function TableList({ styles, isDel, setDel, item, index, workingDays, handleChan
             <div className={styles.inputs}>
                 {
                     workingDays.map((value, i) => (
-                        <select name="" id=""
+                        <select name="" id="" key={i}
                          value={item.attendance[i] === 'present' ? 'P': item.attendance[i] === 'abscent' ? 'A' : '...'  }
                          onChange={(e) => { handleChange(item._id, e.target.value, i)}}
                          disabled={item.attendance[i] === 'present' ? true : item.attendance[i] === 'abscent' ? true: false}
