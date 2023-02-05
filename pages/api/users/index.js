@@ -9,10 +9,9 @@ export default async function handler(req, res) {
                 await db.connect();
                 const user = await User.find();
                 if(user){
-                    return res.status(400).json({ message: 'no users found',data:user });
-                }else{
-                    return res.status(200).json({ message: 'users found',data:user });
+                     res.status(200).json({ message: 'users found',data:user});
                 }
+                await db.disconnect();
             } catch (error) {
                 res.status(404).json({ message: 'bad request' });
             }

@@ -106,8 +106,8 @@ function TableSheet() {
         </div>
         <div className={styles.table__body}>
           <ul>
-            {isLoading && data ? "loading" :
-              data.map((item, index) => (
+            {isLoading ? "loading" :
+              data?.map((item, index) => (
                 <TableList
                   key={index}
                   styles={styles}
